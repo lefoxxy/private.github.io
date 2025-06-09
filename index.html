@@ -1,105 +1,128 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>My Portfolio</title>
-  <style>
-    /* Reset and base styles */
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
-    a { text-decoration: none; color: inherit; }
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>My Portfolio</title>
+<style>
+  :root {
+    --bg-color: #fff;
+    --text-color: #333;
+    --primary-color: #007acc;
+    --accent-color: #ff9800;
+  }
 
-    /* Header */
-    header { background: #007acc; color: #fff; padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; }
-    header nav a { margin-left: 1rem; color: #fff; font-weight: bold; }
-    header nav a:hover { text-decoration: underline; }
+  [data-theme="dark"] {
+    --bg-color: #121212;
+    --text-color: #eee;
+    --primary-color: #1e88e5;
+    --accent-color: #ffa000;
+  }
 
-    /* Hero */
-    .hero { background: url('https://source.unsplash.com/1600x600/?nature') center/cover no-repeat; height: 600px; display: flex; flex-direction: column; justify-content: center; align-items: center; color: #fff; text-align: center; }
-    .hero h1 { font-size: 3rem; margin-bottom: 1rem; }
-    .hero p { font-size: 1.2rem; margin-bottom: 1rem; }
-    .btn { background: #ff9800; color: #fff; padding: 0.75rem 1.5rem; border-radius: 5px; transition: background 0.3s; }
-    .btn:hover { background: #e68900; }
+  * { margin: 0; padding: 0; box-sizing: border-box; transition: background 0.3s, color 0.3s; }
+  body { font-family: Arial, sans-serif; line-height: 1.6; background: var(--bg-color); color: var(--text-color); }
+  a { text-decoration: none; color: inherit; }
 
-    /* Sections */
-    section { padding: 4rem 2rem; max-width: 1000px; margin: auto; }
-    h2 { margin-bottom: 1rem; color: #007acc; }
-    .services { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem; }
-    .service { background: #f9f9f9; padding: 1rem; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); text-align: center; }
-    .service h3 { margin-bottom: 0.5rem; color: #ff9800; }
+  header { background: var(--primary-color); color: #fff; padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; }
+  header nav a { margin-left: 1rem; color: #fff; font-weight: bold; }
+  header nav a:hover { text-decoration: underline; }
 
-    /* Contact Form */
-    form { display: flex; flex-direction: column; }
-    input, textarea { margin-bottom: 1rem; padding: 0.75rem; border: 1px solid #ccc; border-radius: 4px; }
-    input:focus, textarea:focus { outline: none; border-color: #007acc; }
+  .toggle-btn { background: var(--accent-color); border: none; padding: 0.5rem 1rem; color: #fff; cursor: pointer; border-radius: 4px; }
 
-    /* Footer */
-    footer { background: #333; color: #fff; text-align: center; padding: 1rem; }
+  .hero { background: url('https://source.unsplash.com/1600x600/?nature') center/cover no-repeat; height: 600px; display: flex; flex-direction: column; justify-content: center; align-items: center; color: #fff; text-align: center; }
+  .hero h1 { font-size: 3rem; margin-bottom: 1rem; }
+  .hero p { font-size: 1.2rem; margin-bottom: 1rem; }
+  .btn { background: var(--accent-color); color: #fff; padding: 0.75rem 1.5rem; border-radius: 5px; transition: background 0.3s; }
+  .btn:hover { background: #e68900; }
 
-    /* Smooth Scroll */
-    html { scroll-behavior: smooth; }
-  </style>
+  section { padding: 4rem 2rem; max-width: 1000px; margin: auto; }
+  h2 { margin-bottom: 1rem; color: var(--primary-color); }
+  .services { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem; }
+  .service { background: #f9f9f9; padding: 1rem; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); text-align: center; }
+  [data-theme="dark"] .service { background: #1e1e1e; }
+
+  form { display: flex; flex-direction: column; }
+  input, textarea { margin-bottom: 1rem; padding: 0.75rem; border: 1px solid #ccc; border-radius: 4px; }
+  input:focus, textarea:focus { outline: none; border-color: var(--primary-color); }
+
+  footer { background: #333; color: #fff; text-align: center; padding: 1rem; }
+
+  html { scroll-behavior: smooth; }
+</style>
 </head>
 <body>
 
-  <!-- Header -->
-  <header>
-    <div class="logo">MySite</div>
-    <nav>
-      <a href="#about">About</a>
-      <a href="#services">Services</a>
-      <a href="#contact">Contact</a>
-    </nav>
-  </header>
+<!-- Header -->
+<header>
+  <div class="logo">MySite</div>
+  <nav>
+    <a href="#about">About</a>
+    <a href="#services">Services</a>
+    <a href="#contact">Contact</a>
+  </nav>
+  <button class="toggle-btn" id="toggle-theme">Toggle Dark Mode</button>
+</header>
 
-  <!-- Hero -->
-  <section class="hero">
-    <h1>Welcome to MySite</h1>
-    <p>Crafting beautiful web experiences</p>
-    <a href="#about" class="btn">Learn More</a>
-  </section>
+<!-- Hero -->
+<section class="hero">
+  <h1>Welcome to MySite</h1>
+  <p>Crafting beautiful web experiences</p>
+  <a href="#about" class="btn">Learn More</a>
+</section>
 
-  <!-- About Section -->
-  <section id="about">
-    <h2>About Me</h2>
-    <p>Hello! I’m a passionate web developer dedicated to creating beautiful, functional, and user-friendly websites. Let’s build something great together!</p>
-  </section>
+<!-- About Section -->
+<section id="about">
+  <h2>About Me</h2>
+  <p>Hello! I’m a passionate web developer dedicated to creating beautiful, functional, and user-friendly websites. Let’s build something great together!</p>
+</section>
 
-  <!-- Services Section -->
-  <section id="services">
-    <h2>Services</h2>
-    <div class="services">
-      <div class="service">
-        <h3>Web Design</h3>
-        <p>Modern, clean, and user-friendly designs that capture your brand’s essence.</p>
-      </div>
-      <div class="service">
-        <h3>Development</h3>
-        <p>Responsive and accessible websites built with the latest technologies.</p>
-      </div>
-      <div class="service">
-        <h3>SEO</h3>
-        <p>Optimize your website to rank higher and reach more people.</p>
-      </div>
+<!-- Services Section -->
+<section id="services">
+  <h2>Services</h2>
+  <div class="services">
+    <div class="service">
+      <h3>Web Design</h3>
+      <p>Modern, clean, and user-friendly designs that capture your brand’s essence.</p>
     </div>
-  </section>
+    <div class="service">
+      <h3>Development</h3>
+      <p>Responsive and accessible websites built with the latest technologies.</p>
+    </div>
+    <div class="service">
+      <h3>SEO</h3>
+      <p>Optimize your website to rank higher and reach more people.</p>
+    </div>
+  </div>
+</section>
 
-  <!-- Contact Section -->
-  <section id="contact">
-    <h2>Contact Me</h2>
-    <form>
-      <input type="text" placeholder="Your Name" required />
-      <input type="email" placeholder="Your Email" required />
-      <textarea placeholder="Your Message" rows="5" required></textarea>
-      <button type="submit" class="btn">Send Message</button>
-    </form>
-  </section>
+<!-- Contact Section -->
+<section id="contact">
+  <h2>Contact Me</h2>
+  <form>
+    <input type="text" placeholder="Your Name" required />
+    <input type="email" placeholder="Your Email" required />
+    <textarea placeholder="Your Message" rows="5" required></textarea>
+    <button type="submit" class="btn">Send Message</button>
+  </form>
+</section>
 
-  <!-- Footer -->
-  <footer>
-    <p>&copy; 2025 MySite. All rights reserved.</p>
-  </footer>
+<!-- Footer -->
+<footer>
+  <p>&copy; 2025 MySite. All rights reserved.</p>
+</footer>
+
+<script>
+  // Dark Mode Toggle
+  const toggleBtn = document.getElementById('toggle-theme');
+  toggleBtn.addEventListener('click', () => {
+    const currentTheme = document.documentElement.getAttribute('data-theme');
+    if (currentTheme === 'dark') {
+      document.documentElement.setAttribute('data-theme', 'light');
+    } else {
+      document.documentElement.setAttribute('data-theme', 'dark');
+    }
+  });
+</script>
 
 </body>
 </html>
